@@ -1,6 +1,11 @@
 # Django-Supabase Task Manager
 
-### Database Schema
+## 🛠 Tech Stack
+- **Backend:** Django (Python)
+- **Database:** Supabase (PostgreSQL)
+- **Documentation:** Mermaid.js
+
+## 📊 Database Schema
 ```mermaid
 erDiagram
     PROJECT ||--o{ TASK : has
