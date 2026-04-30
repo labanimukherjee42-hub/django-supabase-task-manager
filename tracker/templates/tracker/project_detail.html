@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ project.name }} - Tasks</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; padding: 40px; background-color: #f9f9f9; }
+        .task-list { list-style: none; padding: 0; }
+        .task-item { background: white; margin-bottom: 10px; padding: 15px; border-radius: 8px; border-left: 5px solid #6c5ce7; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .back-link { display: inline-block; margin-bottom: 20px; color: #6c5ce7; text-decoration: none; }
+        .priority-high { color: #d63031; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <a href="{% url 'dashboard' %}" class="back-link">← Back to Dashboard</a>
+    <h1>{{ project.name }}</h1>
+    <p>Client: {{ project.client_name }}</p>
+
+    <h2>Project Tasks</h2>
+    <ul class="task-list">
+        {% for task in tasks %}
+        <li class="task-item">
+            <strong>{{ task.task_description }}</strong> - 
+            <span class="priority-{{ task.priority|lower }}">{{ task.priority }}</span>
+        </li>
+        {% empty %}
+        <li>No tasks assigned to this project yet.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

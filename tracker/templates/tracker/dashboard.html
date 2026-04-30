@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Project Tracker</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f9f9f9; padding: 40px; }
+        .card-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+        
+        /* The Card Styling */
+        .card { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 15px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+            border: 1px solid #eee; 
+            transition: transform 0.2s, box-shadow 0.2s; /* Smooth hover transition */
+        }
+
+        /* Pinterest-style hover effect */
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 { color: #333; border-bottom: 2px solid #6c5ce7; display: inline-block; }
+        .status { font-size: 0.8rem; color: #666; font-style: italic; }
+    </style>
+</head>
+<body>
+    <h1>My Professional Projects</h1>
+    <div class="card-container">
+        {% for project in projects %}
+        
+        <div class="card">
+            <a href="{% url 'project_detail' project.pk %}" style="text-decoration: none; color: inherit;">
+                <h3>{{ project.name }}</h3>
+                <p>Client: {{ project.client_name }}</p>
+                <span class="status">Status: {{ project.status }}</span>
+                <p style="color: #6c5ce7; font-size: 0.8rem; margin-top: 15px; font-weight: bold;">View Tasks →</p>
+            </a>
+        </div>
+        {% empty %}
+        <p>No projects found. Add some in the Admin panel!</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
