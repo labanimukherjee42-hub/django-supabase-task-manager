@@ -11,6 +11,14 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+import dj_database_url # Make sure this is at the top of settings.py
+
+
+
+# This looks for the .env file in your root folder
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -80,20 +88,18 @@ DATABASES = {
     }
 }
 
-import dj_database_url # Make sure this is at the top of settings.py
 
-import dj_database_url
 
 # ... other settings ...
 
 DATABASES = {
     'default': dj_database_url.config(
-        # Paste your Direct URL (Port 5432) here
-        # Remember to replace [YOUR-PASSWORD] with your actual password
-        default='postgresql://postgres.aupjanynuevhgsapaddd:Labani%402026@aws-1-ap-south-1.pooler.supabase.com:5432/postgres',
+        default=os.getenv('DATABASE_URL'),
         conn_max_age=600,
     )
 }
+    
+
 
 
 # Password validation
